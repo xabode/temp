@@ -1,0 +1,717 @@
+/* Base styles for all devices */
+*{
+    padding: 0;
+    margin: 0;
+    border-width: 0;
+}
+
+body {
+   
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0; /* Background color for the extra space */
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.wrapper {
+    display: block;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    transition: transform 1s ease;
+    
+}
+
+
+.container {
+    flex: 1;
+    display: flex;
+    justify-content: right; /* Centers content horizontally */
+    align-items: center; /* Centers content vertically */
+    overflow-y: auto; /* Enable vertical scrolling if necessary */
+    height: calc(100vh - 4.375rem); /* Subtract the height of the navbar */
+    flex-direction: column; /* Ensure that elements stack vertically */
+    text-align: center;
+    background: url('cover2.png');
+    background-size: cover;
+    top:0; 
+}
+
+.navbar {
+
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(204, 32, 131);
+    width: 100%;
+    z-index: 20;
+    position: fixed;
+    bottom: 0;
+    height: 4.375rem;
+
+}
+
+.navbar a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: white;
+    font-size:  0.75rem;
+    position: relative;
+    padding: 5px;
+    padding-top: 15px;
+}
+
+.navbar a .icon {
+    font-size: 1rem;
+    color: white !important;   
+    fill: white;
+}
+
+.navbar a .icon svg {
+    fill: white; /* Set the fill color to white */
+}
+
+.navbar a:hover {
+    background-color: #575757;
+}
+
+.panel {
+    
+    position: absolute;
+    bottom:0;
+    background-color: white;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    overflow-y: auto;
+    margin-bottom:4.375rem;
+    display: none; /* Hide all panels by default */
+    padding:1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.Location-item {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5em;
+    
+    
+}
+
+.location-iteml, .location-itemr {
+    padding: auto;
+    align-items: center;
+    text-align: center;
+}
+
+
+.calender-item {
+    display: flex;
+    padding: 0.625rem;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5em;
+    width: body;
+}
+
+.calender-iteml ,.calender-itemr {
+    padding: auto;
+    align-items: center;
+    text-align: center;
+}
+
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Mobile styles */
+@media (max-width:48rem) {
+    .navbar {
+        bottom: 0;
+    }
+
+    .body {
+        background-color: lightblue;
+        width: 100%;
+        height: 100vh;
+        margin: 0;
+        overflow-x: hidden;
+
+    }
+
+    .container{
+        height: calc(100vh - 7.5rem);
+        top: 0.0625rem;
+    }
+
+    .cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 90%;
+        height: 90%;
+    }
+    .panel{
+        margin-bottom: 35%;
+
+    }
+   
+}
+
+/* Laptop styles */
+@media (min-width:25rem) {
+    .navbar {
+        width: 25rem;
+    }
+    .wrapper {
+        max-width: 25rem;
+    }
+    .body {
+        background-color: #e6e0ce;
+    }
+}
+
+/* Picture cover styles */
+.cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('background2.png') no-repeat center center;
+    background-size: cover;
+    z-index: 35; /* Ensure cover is on top */
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+.cover-text {
+    padding:  1.875rem;
+    padding-top: 45%;
+    text-align: center;
+    color: rgb(107, 118, 94);
+}
+
+.cover button {
+    padding: 0.625rem 1.25rem;
+    font-size: 1.125rem;
+    cursor: pointer;
+    background-color: rgb(204, 32, 131);
+    color: white;
+    border: none;
+    border-radius: 0.3125rem;
+    z-index: 31; /* Ensure button is on top */
+    
+}
+
+.cover.slide-up {
+    animation: slideUpAndDisappear 1s forwards;
+}
+
+@keyframes slideUpAndDisappear {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 1;
+    }
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.contact-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.contact-name {
+    font-weight: bold;
+    margin: 0;
+}
+
+.contact-role {
+    font-size: 0.9em;
+    color: gray;
+    margin: 0;
+}
+
+.contact-icons {
+    display: flex;
+    gap: 0.5em;
+}
+
+.contact-item a {
+    display: flex;
+    align-items: center;
+    gap: 0.0625rem;
+    text-decoration: none;
+    color: #333;
+    margin-left: 0; /* Adjust this value as needed */
+}
+
+.container::-webkit-scrollbar {
+    width: 0;
+    background: transparent; /* Optional: Just to ensure the scroll bar is invisible */
+}
+
+.container {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+    overflow-y: scroll; /* Keep scroll functionality */
+}
+
+.countdays {
+    text-align: center;
+    margin: 1.25rem 0.625rem;
+    display: inline-block; 
+
+}
+
+.countdownd {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    font-size: 1.125rem;
+    justify-content: space-between;
+    font-family: 'Aceh';
+}
+.countdown-item { 
+    font-size: 1.125rem; 
+}
+
+.greeting {
+    font-size: 1.25rem;
+    font-family: "Aceh";
+}
+
+.names, .gromparenrts {
+    font-size: 1rem;
+    font-family: 'Louis';
+}
+.names-ar, .gromparenrts-ar {
+    font-size: 1.125rem;
+    font-family: 'RuqaaBold';
+    line-height: 1.2;
+
+}
+
+.couple{
+    font-family: "YaquoteScript";
+    font-size: 1.875rem;
+    font-weight: light;
+}
+
+.couple-ar{
+    font-family: "diwan";
+    font-size: 2.125rem;
+    font-weight: light;
+    line-height: 1.2;
+}
+
+.day,
+.date ,
+.time ,
+.venue-address,
+.venue-addressa,
+.appreciation,
+.venue-title,
+.greeting1,
+.greeting2,
+.invitation, 
+.invitation2 {
+
+    font-family: "Aceh";
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+.day-ar,
+.date-ar,
+.time-ar,
+.venue-address-ar,
+.venue-addressa-ar,
+.appreciation-ar,
+.invitation-ar
+ {
+    font-family: "RuqaaRegular", sans-serif;
+    font-size: 1rem;
+    font-weight: normal;
+    font-style: normal;
+    direction: rtl;
+}
+
+.date-ah-ar{
+    font-family: "RuqaaRegular", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    direction: rtl;
+    font-size: 0.9em;
+    color: gray;
+}
+
+.date1{
+    font-family: "Aceh";
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+.date-ah{
+    font-family: "Aceh";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.9em;
+    color: gray;
+
+}
+
+.date1{
+    font-family: "Aceh";
+    font-size: 20px;
+    font-weight: bold;
+    font-style: normal;
+
+}
+
+.date-ha{
+    font-family: "Aceh";
+    font-weight: bold;
+    font-style: normal;
+    font-size: 0.9em;
+    color: rgb(107, 118, 94);;
+    margin-bottom: 10%;
+    
+
+}
+.date-card{
+    font-family: "Aceh";
+    font-weight: normal;
+    font-style: normal;
+    font-size: 0.9em;
+    color: gray;
+    padding-bottom: 70%;
+    
+
+}
+
+
+
+
+
+@font-face {
+    font-family: 'YaquoteScript';
+    src: url('YaquoteScript.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Aceh';
+    src: url('Louis George Cafe Light Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'nova';
+    src: url('nova.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'esthetique';
+    src: url('esthetique.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'magnolia';
+    src: url('magnolia.otf') format('truetype');
+}
+
+@font-face {
+    font-family: 'diwan';
+    src: url('arfonts-tharwat-emara-dewani.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RuqaaRegular';
+    src: url('RuqaaRegular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Louis';
+    src: url('Louis.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RuqaaBold';
+    src: url('RuqaaBold.ttf') format('truetype');
+}
+
+
+
+.names-text {
+    font-size: 36px;
+    font-family: 'nova', serif;
+    margin-top: 10%;
+
+}
+
+.buttonIN {
+    padding-left: 30%;
+}
+
+.greeting-text {
+    font-size: 18px;
+    font-family: 'Aceh', serif;
+    font-weight: bolder;
+}
+
+.invitation-text{
+    font-size: 18px;
+    margin-top: 10%;
+    
+}
+
+.Gift-items {
+    text-align: center;
+    align-items: center;
+    padding: auto;
+    width: 100%;
+}
+
+
+
+.malay-V {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.english-V{
+
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.arabic-V{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.buttons {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+.buttons button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px;
+    outline: none;
+    background-color: rgb(204, 32, 131);
+    color: white; /* Change color as needed */
+}
+
+.buttons button:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.buttons button:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.buttons button:nth-child(2) {
+    border-radius: 0;
+}
+
+.itinerary {
+    display: none;
+}
+
+.itinerary.active {
+    display: block;
+}
+
+.my-4 {
+    margin: 1.5rem 0;
+}
+
+
+
+.sec-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.venue-title,
+.itinerary-title,
+.attire-title {
+    margin-bottom: 1rem;
+}
+
+.itinerary-item,
+.itinerary-time,
+.attire-description,
+.hashtag {
+    font-size: 18px;
+}
+
+
+        /* Overlay styles */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        #overlay .overlay-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #overlay .overlay-button {
+            background: rgb(204, 32, 131);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        /* Loading animation styles */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-top-color: rgb(204, 32, 131);
+            animation: spin 1s infinite linear;
+            margin: auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+
+
+
+.rsvp-items{
+	width: 80%;
+	padding:10%;
+	border: 1px solid #eeeeee;
+	background-color: rgb(204, 32, 131);
+    font-family: 'aceh';
+    align-items: center;
+    text-align: center;
+}
+h4 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: white;
+}
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+
+#submit{
+	border: none;
+	background-color: rgb(125, 103, 90);
+	color: white;
+	width: 200px;
+	margin-top: 10px;
+	border-radius: 5px;
+}
+#submit:hover{
+	background-color: #333333;
+
+}
+
+.audioPlayer{
+    width: 100%;
+   height: 200px;
+   
+}
+
+
+
+.insideCover {
+    padding-top: 25%;
+    text-align: center;
+    color: rgb(107, 118, 94);
+
+}
+
+.card2 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: url('background2.png') no-repeat center center;
+    background-size: cover;
+}
+
+.back-text {
+    font-size: 1.5rem; /* Adjust as needed */
+    padding: auto;
+    font-family: 'Aceh';
+    padding: 5px;
+    padding-bottom: 20px;
+}
+
+.names-card {
+    font-family: 'nova', serif;
+    font-size: 30px; /* Adjust as needed */
+    padding: 5px;
+    padding-bottom: 40px;
+
+}
+
+.invitation-card {
+    font-size: 1em; /* Adjust as needed */
+    padding: auto;
+    font-family: 'Aceh';
+    padding: 5px;
+    font-weight: bolder;
+
+}
