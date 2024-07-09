@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah & Nurul Akad Nikah</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <style>
+        /* Base styles for all devices */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Background color for the extra space */
+            height: 100vh;
+            overflow: hidden; 
+        }
+
+        .wrapper {
+            display: block;
+            flex-direction: column;
+            width: 100%;
+            background-color: white;
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            transition: transform 1s ease;
+        }
+
+        .wrapper.zoom-out {
+            transform: scale(0);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            justify-content: right; /* Centers content horizontally */
+            align-items: center; /* Centers content vertically */
+            overflow-y: auto; /* Enable vertical scrolling if necessary */
+            height: calc(100vh - 56px); /* Subtract the height of the navbar */
+            flex-direction: column; /* Ensure that elements stack vertically */
+            text-align: center;
+            background: url('background.png');
+            background-size: cover; /* Ensures the background image covers the container */
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: palevioletred;
+            width: 100%;
+            z-index: 20; /* Ensure navbar is on top */
+        }
+
+        .navbar a {
+            flex: 1;
+            text-align: center;
+            padding: 14px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 12px;
+            position: relative;
+        }
+
+        .navbar a .icon {
+            font-size: 16px;
+            color: white !important;   
+            fill: white;
+        }
+
+        .navbar a .icon svg {
+            fill: white; /* Set the fill color to white */
+        }
+
+        .navbar a:hover {
+            background-color: #575757;
+        }
+
+        .panel {
+            position: absolute;
+            bottom: 56px;
+            width: 100%; 
+            background-color: white;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .panel-flex {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-block {
+            display: block;
+        }
+
+        .panel iframe,
+        .panel a,
+        .panel p {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .panel a {
+            color: green;
+            text-decoration: underline;
+        }
+
+        .Location-item,
+        .calender-item {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0.5em;
+        }
+
+        .location-iteml,
+        .location-itemr,
+        .calender-iteml,
+        .calender-itemr {
+            padding: auto;
+            align-items: center;
+            text-align: center;
+        }
+
+        .show {
+            display: inline-block;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile styles */
+        @media (max-width: 600px) {
+            .navbar {
+                bottom: 0;
+            }
+            
+            .panel {
+                bottom: 0;
+            }
+            
+            body {
+                background-color: lightblue;
+                width: 100%;
+                height: 100vh;
+                margin: 0;
+                overflow-x: hidden;
+            }
+        }
+
+        /* Laptop styles */
+        @media (min-width: 601px) {
+            .wrapper {
+                max-width: 400px;
+            }
+            body {
+                background-color: #f0f0f0;
+            }
+        }
+
+        /* Picture cover styles */
+        .cover {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('card2.png') no-repeat center center;
+            background-size: cover;
+            z-index: 30; /* Ensure cover is on top */
+            display: block;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cover-text {
+            padding: auto;
+            padding-top: 50%;
+            text-align: center;
+            color: rgb(107, 118, 94);
+        }
+
+        .cover button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: rgba(211, 55, 204, 0.6);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            z-index: 31; /* Ensure button is on top */
+            margin-top: 30%;
+        }
+
+        .cover.slide-up {
+            animation: slideUpAndDisappear 1s forwards;
+        }
+
+        @keyframes slideUpAndDisappear {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0em;
+        }
+
+        .contact-info {
+            flex-grow: 1;
+        }
+
+        .contact-name {
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .contact-role {
+            font-size: 0.9em;
+            color: gray;
+            margin: 0;
+        }
+
+        .contact-icons {
+            display: flex;
+            gap: 0.5em;
+        }
+
+        .contact-item a {
+            display: flex;
+            align-items: center;
+            gap: 1px;
+            text-decoration: none;
+            color: #333;
+            margin-left: 0px; /* Adjust this value as needed */
+        }
+
+        .container::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* Optional: Just to ensure the scroll bar is invisible */
+        }
+
+        .container {
+            -ms-overflow-style: none;  /* Internet Explorer 10+ */
+            scrollbar-width: none;  /* Firefox */
+        }
+
+        .container {
+            overflow-y: scroll; /* Keep scroll functionality */
+        }
+
+        .countdays {
+            text-align: center;
+            margin: 0 10px;
+        }
+
+        .countdownd {
+            display: flex;
+            text-align: center;
+            align-items: center;
+            font-size: 18px;
+            justify-content: space-between;
+            font-family: 'Aceh';
+        }
+
+        .greeting {
+            font-size: 20px;
+            font-family: "Aceh";
+        }
+
+        .names, .gromparenrts {
+            font-size: 36px;
+            font-family: 'YaquoteScript', serif;
+        }
+
+        .couple{
+            font-family: "Aceh";
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .date,
+        .time,
+        .venue-address,
+        .venue-addressa,
+        .appreciation,
+        .venue-title,
+        .greeting1,
+        .greeting2,
+        .invitation, 
+        .invitation2 {
+            font-family: "Aceh";
+            font-size: 26spx;
+        }
+
+        @font-face {
+            font-family: 'YaquoteScript';
+            src: url('YaquoteScript.ttf') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Aceh';
+            src: url('Aceh.otf') format('truetype');
+        }
+
+        .names-text {
+            font-size: 48px;
+            font-family: 'YaquoteScript', serif;
+        }
+
+        .buttonIN {
+            padding-left: 30%;
+        }
+
+        .greeting-text {
+            font-size: 20px;
+            font-family: 'Aceh', serif;
+        }
+
+        .Gift-items {
+            text-align: center;
+            align-items: center;
+            padding: auto;
+        }
+
+        .card2 {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Adjust as needed */
+            margin: auto;
+        }
+
+        .pictureGo {
+            width: 100%;
+            display: block;
+        }
+
+        .back-text,
+        .names-card,
+        .invitation-card {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: rgb(107, 118, 94); /* Change text color as needed */
+        }
+
+        .back-text {
+            top: 10%;
+            font-size: 20px;
+            text-align: center;
+            width: 100%;
+            margin: auto;
+            padding-top: 10%;
+        }
+
+        .names-card {
+            top: 20%;
+            font-size: 40px;
+        }
+
+        .invitation-card {
+            top: 60%;
+            font-size: 26px;
+            padding-top: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container">
+            <!-- Your main content goes here -->
+        </div>
+
+        <div class="panel">
+            <div class="panel-flex">
+                <!-- Additional content for panel -->
+            </div>
+        </div>
+
+        <div class="navbar">
+            <a href="#home"><i class="fa fa-home icon"></i> Home</a>
+            <a href="#invitation"><i class="fa fa-envelope icon"></i> Invitation</a>
+            <a href="#location"><i class="fa fa-map-marker icon"></i> Location</a>
+            <a href="#calendar"><i class="fa fa-calendar icon"></i> Calendar</a>
+            <a href="#contact"><i class="fa fa-phone icon"></i> Contact</a>
+        </div>
+
+        <div class="cover" id="cover">
+            <div class="cover-text">
+                <button onclick="openInvitation()">Open Invitation</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openInvitation() {
+            const cover = document.getElementById('cover');
+            cover.classList.add('slide-up');
+            document.querySelector('.wrapper').classList.add('zoom-out');
+            setTimeout(() => {
+                cover.style.display = 'none';
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
